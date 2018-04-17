@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lbl2: UILabel!
     var myTimer = Timer()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +27,8 @@ class ViewController: UIViewController {
         myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {(myTimer) in
             self.updateTime()
         })
+        
+        
         }
     
     func updateTime() {
@@ -36,19 +39,23 @@ class ViewController: UIViewController {
         
         if lbl2.text == lbl.text {
             view.backgroundColor = UIColor.red
+            let myAlert = UIAlertController(title: "알림", message: "설정된시간이 되었습니다.", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "확인", style: .default) {
+                (myAction: UIAlertAction) -> Void in
+                self.view.backgroundColor = UIColor.white}
+            
+            myAlert.addAction(okAction)
+            
+            
+            present(myAlert, animated: true, completion: nil)
         }
-        
     }
+    
     @IBAction func CDP(_ sender: Any) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         lbl.text = formatter.string(from: DP.date)
-    
     }
-    @IBAction func stop(_ sender: Any) {
-        view.backgroundColor = UIColor.white
-    }
-    
-
-    }
+}
 
